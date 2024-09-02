@@ -8,7 +8,7 @@
   "profile": "",
   "region": "",
   "configuration": "Release",
-  "s3-prefix": "sam-app/",
+  "s3-prefix": "raid-tracker/",
   "template": "serverless.template",
   "template-parameters": ""
 }

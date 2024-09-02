@@ -17,8 +17,8 @@ lint = true
 capabilities = "CAPABILITY_IAM"
 confirm_changeset = true
 resolve_s3 = true
-stack_name = "sam-app-dotnet"
-s3_prefix = "sam-app-dotnet"
+stack_name = "raid-tracker-dotnet"
+s3_prefix = "raid-tracker-dotnet"
 region = "us-east-2"
 image_repositories = []
 

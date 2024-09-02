@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  Sample SAM Template for sam-app
+  Sample SAM Template for raid-tracker
 
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -9,7 +9,7 @@ Globals:
     Timeout: 100
 
 Resources:
-  NetCodeWebAPIServerless:
+  RaidTrackerBackend:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       Description: A simple example includes a .NET Core WebAPI App with DynamoDB
@@ -21,8 +21,11 @@ Resources:
       Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
         Variables:
           SAMPLE_TABLE: !Ref SampleTable
+          USER_TABLE: !Ref UserTable
       Policies:
         # Give Create/Read/Update/Delete Permissions to the SampleTable
+      - DynamoDBCrudPolicy:
+          TableName: !Ref UserTable
       - DynamoDBCrudPolicy:
           TableName: !Ref SampleTable
       Events:
@@ -44,6 +47,16 @@ Resources:
     Type: AWS::Serverless::SimpleTable
     Properties:
       TableName: sam-appBookCatalog
+      PrimaryKey:
+        Name: Id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2
+        WriteCapacityUnits: 2
+  UserTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: raid-tracker-UserTable
       PrimaryKey:
         Name: Id
         Type: String
